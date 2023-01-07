@@ -8,9 +8,11 @@
 
 const express = require('express');
 const { Configuration, OpenAIApi } = require('openai');
+const OPENAI_KEY = process.env.OPENAI_KEY;
+const WHATSAPP_ACCESS_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN
 
 const configuration = new Configuration({
-  apiKey: 'YOUR_OPENAI_KEY',
+  apiKey: OPENAI_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -37,7 +39,8 @@ app.post('/webhook', (req, res) => {
 
 app.get('/webhook', (req, res) => {
 //   const body = req.body;
-  console.log('body', req);
+  console.log('params', req.params);
+  console.log('query', req.query);
 
 //   handleMessage(body);
 
