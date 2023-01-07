@@ -31,7 +31,8 @@ app.post('/webhook', (req, res) => {
 
   handleMessage(body);
 
-  res.sendStatus(200);
+  res.send('Yo!')
+//   res.sendStatus(200);
 });
 
 app.listen(3000, () => {
