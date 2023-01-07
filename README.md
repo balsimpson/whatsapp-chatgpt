@@ -5,8 +5,3 @@ A bot hosted on cyclic to chat with ChatGPT using WhatsApp. You'll need an OpenA
 ### Deploy it in 7 seconds: 
 
 [![Deploy to Cyclic](https://deploy.cyclic.app/button.svg)](https://deploy.cyclic.app/balsimpson/whatsapp-chatgpt-bot)
-
-<a href="https://deploy.cyclic.sh/balsimpson/whatsapp-chatgpt-bot">
-    <img src="https://deploy.cyclic.sh/button.svg" />
-</a>
-
