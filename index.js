@@ -118,7 +118,7 @@ async function sendMessage(msg, from, id) {
 	});
 }
 
-app.post('/webhook', (req, res) => {
+app.post('/webhook', async (req, res) => {
 	const body = req.body;
 
 	const { phone_number_id, from, msg_body } = getMsg(body)
