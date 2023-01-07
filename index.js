@@ -100,6 +100,8 @@ async function sendMessage(msg, from, id) {
 }
 
 app.post('/webhook', async (req, res) => {
+
+	console.log("requet", req.body)
 	try {
 		const body = req.body;
 
