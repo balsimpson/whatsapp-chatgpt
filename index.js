@@ -35,6 +35,16 @@ app.post('/webhook', (req, res) => {
 //   res.sendStatus(200);
 });
 
+app.get('/webhook', (req, res) => {
+//   const body = req.body;
+  console.log('body', req);
+
+//   handleMessage(body);
+
+  res.send('Yo!')
+//   res.sendStatus(200);
+});
+
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
 });
