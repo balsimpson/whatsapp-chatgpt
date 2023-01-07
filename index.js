@@ -29,7 +29,7 @@ async function handleMessage(body) {
 
 app.post('/webhook', (req, res) => {
   const body = req.body;
-  console.log('body', body);
+  console.log('req', req);
 
   handleMessage(body);
 
@@ -38,17 +38,10 @@ app.post('/webhook', (req, res) => {
 });
 
 app.get('/webhook', (req, res) => {
-//   const body = req.body;
-  console.log('params', req.params);
-  console.log('query', req.query);
-
   let mode = req.query["hub.mode"];
   let token = req.query["hub.verify_token"];
   let challenge = req.query["hub.challenge"];
-  //   handleMessage(body);
-
   res.send(challenge)
-//   res.sendStatus(200);
 });
 
 app.listen(3000, () => {
