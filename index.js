@@ -29,9 +29,9 @@ async function handleMessage(body) {
 
 app.post('/webhook', (req, res) => {
   const body = req.body;
-  console.log('req', req);
+  console.log('req', req.body);
 
-  handleMessage(body);
+//   handleMessage(body);
 
   res.send('Yo!')
 //   res.sendStatus(200);
