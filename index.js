@@ -18,6 +18,7 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const app = express();
+app.use(express.json());
 
 async function sendMessage(msg, from, token, id) {
   // Send message code here
@@ -29,7 +30,7 @@ async function handleMessage(body) {
 
 app.post('/webhook', (req, res) => {
   const body = req.body;
-  console.log('req', req.body);
+  console.log('req', body);
 
 //   handleMessage(body);
 
