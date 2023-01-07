@@ -1,5 +1,5 @@
 {
-  "name": "starter-express-api",
+  "name": "whatsapp-chatgpt-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cyclic-software/starter-express-api.git"
+    "url": "git+https://github.com/balsimpson/whatsapp-chatgpt-bot.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cyclic-software/starter-express-api/issues"
+    "url": "https://github.com/balsimpson/whatsapp-chatgpt-bot/issues"
   },
-  "homepage": "https://github.com/cyclic-software/starter-express-api#readme",
+  "homepage": "https://github.com/balsimpson/whatsapp-chatgpt-bot#readme",
   "dependencies": {
     "express": "^4.17.1",
     "openai": "^3.1.0"
