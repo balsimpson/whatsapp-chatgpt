@@ -29,17 +29,22 @@ async function handleMessage(body) {
 }
 
 function getMsg(body) {
-	let phone_number_id =
-		body.entry[0].changes[0].value.metadata.phone_number_id || "";
-	let from = ""
-	let msg_body = "";
 
-	if (body.entry[0].changes[0].value && body.entry[0].changes[0].value.messages[0]) {
-		from = body.entry[0].changes[0].value.messages[0].from || ""; // extract the phone number from the webhook payload
-		msg_body = body.entry[0].changes[0].value?.messages[0]?.text?.body || "";
+	try {
+		let phone_number_id =
+			body.entry[0].changes[0].value.metadata.phone_number_id || "";
+		let from = ""
+		let msg_body = "";
+	
+		if (body.entry[0].changes[0].value && body.entry[0].changes[0].value.messages[0]) {
+			from = body.entry[0].changes[0].value.messages[0].from || ""; // extract the phone number from the webhook payload
+			msg_body = body.entry[0].changes[0].value?.messages[0]?.text?.body || "";
+		}
+	
+		return { phone_number_id, from, msg_body }
+	} catch (error) {
+		return error
 	}
-
-	return { phone_number_id, from, msg_body }
 }
 
 function getCompletion() {
