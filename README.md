@@ -1,11 +1,8 @@
-# starter-express-api
+# WhatsApp ChatGPT Bot
 
-This is the simplest possible nodejs api using express that responds to any request with: 
-```
-Yo!
-```
+A bot hosted on cyclic to chat with ChatGPT using WhatsApp. You'll need an OpenAI API and a Whatsapp Access Token for this to work.
 
 ### Deploy it in 7 seconds: 
 
-[![Deploy to Cyclic](https://deploy.cyclic.app/button.svg)](https://deploy.cyclic.app/)
+[![Deploy to Cyclic](https://deploy.cyclic.app/button.svg)](https://deploy.cyclic.app/balsimpson/whatsapp-chatgpt-bot)
 
