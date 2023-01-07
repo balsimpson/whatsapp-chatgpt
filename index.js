@@ -1,10 +1,3 @@
-// const express = require('express')
-// const app = express()
-// app.all('/', (req, res) => {
-//     console.log("Just got a request!")
-//     res.send('Yo!')
-// })
-// app.listen(process.env.PORT || 3000)
 const https = require('https');
 const express = require('express');
 const { Configuration, OpenAIApi } = require('openai');
@@ -19,14 +12,6 @@ const openai = new OpenAIApi(configuration);
 
 const app = express();
 app.use(express.json());
-
-// async function sendMessage(msg, from, token, id) {
-// 	// Send message code here
-// }
-
-async function handleMessage(body) {
-	// Message handling code here
-}
 
 function getMsg(body) {
 
@@ -62,28 +47,6 @@ async function getCompletion(prompt) {
 		console.log("Failed to get completion - ", error.message)
 		return error
 	}
-}
-
-async function makeApiRequest() {
-	return new Promise((resolve, reject) => {
-		// Make a GET request to an external API
-		https.get('https://example.com/api/endpoint', (res) => {
-			let data = '';
-
-			res.on('data', (chunk) => {
-				// Build up the data string as the response comes in
-				data += chunk;
-			});
-
-			res.on('end', () => {
-				// Resolve the promise with the data when the response is complete
-				resolve(data);
-			});
-		}).on('error', (error) => {
-			// Reject the promise if there's an error
-			reject(error);
-		});
-	});
 }
 
 async function sendMessage(msg, from, id) {
@@ -140,12 +103,10 @@ app.post('/webhook', async (req, res) => {
 	const body = req.body;
 
 	const { phone_number_id, from, msg_body } = getMsg(body)
-	console.log('req', phone_number_id, from, msg_body);
 	
 	if (from && msg_body) {
 		let msg = await getCompletion(msg_body)
 		let result = await sendMessage(msg, from, phone_number_id);
-		console.log('res', result);
 	}
 
 	// res.send('Yo!')
