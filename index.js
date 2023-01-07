@@ -42,9 +42,12 @@ app.get('/webhook', (req, res) => {
   console.log('params', req.params);
   console.log('query', req.query);
 
-//   handleMessage(body);
+  let mode = req.query["hub.mode"];
+  let token = req.query["hub.verify_token"];
+  let challenge = req.query["hub.challenge"];
+  //   handleMessage(body);
 
-  res.send({key: process.env.OPENAI_KEY})
+  res.send(challenge)
 //   res.sendStatus(200);
 });
 
