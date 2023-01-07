@@ -41,7 +41,7 @@ app.get('/webhook', (req, res) => {
 
 //   handleMessage(body);
 
-  res.send('Yo!')
+  res.send({key: process.env.OPENAI_KEY})
 //   res.sendStatus(200);
 });
 
