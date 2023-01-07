@@ -124,7 +124,7 @@ app.post('/webhook', async (req, res) => {
 	const { phone_number_id, from, msg_body } = getMsg(body)
 	console.log('req', phone_number_id, from, msg_body);
 	//   handleMessage(body);
-	let result = await sendMessage("some message!", from, id);
+	let result = await sendMessage("some message!", from, phone_number_id);
 	console.log('res', result);
 
 	res.send('Yo!')
