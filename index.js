@@ -47,8 +47,21 @@ function getMsg(body) {
 	}
 }
 
-function getCompletion() {
-
+async function getCompletion(prompt) {
+	let model = "text-davinci-003"
+	try {
+		const prediction = await openai.createCompletion({
+			model: model,
+			prompt: prompt,
+			max_tokens: 256,
+			temperature: 0.5,
+		});
+	
+		return prediction.data.choices[0].text
+	} catch (error) {
+		console.log("Failed to get completion - ", error.message)
+		return error
+	}
 }
 
 async function makeApiRequest() {
@@ -130,7 +143,8 @@ app.post('/webhook', async (req, res) => {
 	console.log('req', phone_number_id, from, msg_body);
 	
 	if (from && msg_body) {
-		let result = await sendMessage("some message!", from, phone_number_id);
+		let msg = await getCompletion(msg_body)
+		let result = await sendMessage(msg, from, phone_number_id);
 		console.log('res', result);
 	}
 
