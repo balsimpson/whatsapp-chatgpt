@@ -127,8 +127,8 @@ app.post('/webhook', async (req, res) => {
 	let result = await sendMessage("some message!", from, phone_number_id);
 	console.log('res', result);
 
-	res.send('Yo!')
-	//   res.sendStatus(200);
+	// res.send('Yo!')
+	res.sendStatus(200);
 });
 
 app.get('/webhook', (req, res) => {
