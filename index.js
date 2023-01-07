@@ -20,12 +20,12 @@ function getMsg(body) {
 			body.entry[0].changes[0].value.metadata.phone_number_id || "";
 		let from = ""
 		let msg_body = "";
-	
+
 		if (body.entry[0].changes[0].value && body.entry[0].changes[0].value.messages[0]) {
 			from = body.entry[0].changes[0].value.messages[0].from || ""; // extract the phone number from the webhook payload
 			msg_body = body.entry[0].changes[0].value?.messages[0]?.text?.body || "";
 		}
-	
+
 		return { phone_number_id, from, msg_body }
 	} catch (error) {
 		return error
@@ -41,7 +41,7 @@ async function getCompletion(prompt) {
 			max_tokens: 256,
 			temperature: 0.5,
 		});
-	
+
 		return prediction.data.choices[0].text
 	} catch (error) {
 		console.log("Failed to get completion - ", error.message)
@@ -100,13 +100,17 @@ async function sendMessage(msg, from, id) {
 }
 
 app.post('/webhook', async (req, res) => {
-	const body = req.body;
+	try {
+		const body = req.body;
 
-	const { phone_number_id, from, msg_body } = getMsg(body)
-	
-	if (from && msg_body) {
-		let msg = await getCompletion(msg_body)
-		let result = await sendMessage(msg, from, phone_number_id);
+		const { phone_number_id, from, msg_body } = getMsg(body)
+
+		if (from && msg_body) {
+			let msg = await getCompletion(msg_body)
+			let result = await sendMessage(msg, from, phone_number_id);
+		}
+	} catch (error) {
+		console.log(error)
 	}
 
 	// res.send('Yo!')
