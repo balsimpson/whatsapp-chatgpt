@@ -126,6 +126,51 @@ app.get('/webhook', (req, res) => {
 	res.send(challenge)
 });
 
+app.get('/privacy', (req, res) => {
+	let text = `Thank you for visiting our website/app. We take the privacy of our users very seriously and are committed to protecting your personal information. This privacy policy explains how we collect, use, and share your personal information when you use our website/app.
+
+	Collection of Personal Information
+	
+	We may collect personal information from you when you use our website/app, such as your name, email address, and any other information you choose to provide. We may also collect certain information automatically, such as your IP address, device type, and browser type.
+	
+	Use of Personal Information
+	
+	We may use your personal information for the following purposes:
+	
+	To provide and improve our website/app and services
+	To communicate with you about your account or our services
+	To personalize your experience on our website/app
+	To protect against, identify, and prevent fraud and other illegal activities
+	Sharing of Personal Information
+	
+	We may share your personal information with third parties for the following purposes:
+	
+	To service providers who assist us in providing our services
+	To comply with legal requirements, such as a subpoena or court order
+	To protect the rights, property, or safety of us or our users
+	Cookies and Tracking Technologies
+	
+	We may use cookies and other tracking technologies to collect and store information about your use of our website/app. These technologies may be used to personalize your experience, remember your preferences, and track your movements on our website/app. You can disable cookies in your browser settings, but doing so may limit your ability to use certain features of our website/app.
+	
+	Third-Party Links
+	
+	Our website/app may contain links to third-party websites. We are not responsible for the privacy practices of these websites, and we encourage you to review the privacy policies of each website you visit.
+	
+	Data Security
+	
+	We take appropriate measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction. However, no security measures are perfect, and we cannot guarantee the security of your personal information.
+	
+	Changes to This Privacy Policy
+	
+	We may update this privacy policy from time to time. We will post any changes on this page and encourage you to review the policy periodically. Your continued use of our website/app after any changes have been made signifies your acceptance of the updated policy.
+	
+	Contact Us
+	
+	If you have any questions or concerns about this privacy policy or the collection, use, and sharing of your personal information, please contact us at [insert contact information].`
+
+	res.send(text)
+});
+
 app.listen(3000, () => {
 	console.log('Server listening on port 3000');
 });
