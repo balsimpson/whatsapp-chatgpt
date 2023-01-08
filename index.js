@@ -166,7 +166,7 @@ app.get('/privacy', (req, res) => {
 	
 	Contact Us
 	
-	If you have any questions or concerns about this privacy policy or the collection, use, and sharing of your personal information, please contact us at [insert contact information].`
+	If you have any questions or concerns about this privacy policy or the collection, use, and sharing of your personal information, please contact us at tinkr.simpson@gmail.com.`
 
 	res.send(text)
 });
