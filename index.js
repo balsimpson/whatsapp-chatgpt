@@ -38,7 +38,7 @@ async function getCompletion(prompt) {
 		const prediction = await openai.createCompletion({
 			model: model,
 			prompt: prompt,
-			max_tokens: 256,
+			max_tokens: 512,
 			temperature: 0.5,
 		});
 
