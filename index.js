@@ -101,7 +101,6 @@ async function sendMessage(msg, from, id) {
 
 app.post('/webhook', async (req, res) => {
 
-	console.log("requet", req.body)
 	try {
 		const body = req.body;
 
@@ -109,6 +108,7 @@ app.post('/webhook', async (req, res) => {
 
 		if (from && msg_body) {
 			let msg = await getCompletion(msg_body)
+			console.log("message", from, msg_body + " - " + msg)
 			let result = await sendMessage(msg, from, phone_number_id);
 		}
 	} catch (error) {
