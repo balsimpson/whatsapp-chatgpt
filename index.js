@@ -127,7 +127,7 @@ app.post('/webhook', async (req, res) => {
 
 		if (from && msg_body) {
 			let msg = await getChatCompletion(msg_body)
-			console.log("message", from, msg_body + ": " + msg)
+			console.log("message:", from, msg_body + ": " + msg)
 			let result = await sendMessage(msg, from, phone_number_id);
 		}
 	} catch (error) {
