@@ -49,6 +49,25 @@ async function getCompletion(prompt) {
 	}
 }
 
+async function getChatCompletion(prompt) {
+	let model = "text-davinci-003"
+	try {
+		const prediction = await openai.createChatCompletion({
+			model: "gpt-3.5-turbo",
+			messages: [{
+				role: "user",
+				content: prompt
+			}],
+			max_tokens: 256
+		});
+
+		return prediction.data.choices[0].message.content
+	} catch (error) {
+		console.log("Failed to get completion - ", error.message)
+		return error
+	}
+}
+
 async function sendMessage(msg, from, id) {
 	return new Promise((resolve, reject) => {
 		// Set up the options for the POST request
@@ -107,8 +126,8 @@ app.post('/webhook', async (req, res) => {
 		const { phone_number_id, from, msg_body } = getMsg(body)
 
 		if (from && msg_body) {
-			let msg = await getCompletion(msg_body)
-			console.log("message", from, msg_body + " - " + msg)
+			let msg = await getChatCompletion(msg_body)
+			console.log("message", from, msg_body + ": " + msg)
 			let result = await sendMessage(msg, from, phone_number_id);
 		}
 	} catch (error) {
