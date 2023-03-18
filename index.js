@@ -210,6 +210,41 @@ app.post('/chat', async (req, res) => {
 	}
 });
 
+app.get('/chat', async (req, res) => {
+
+	try {
+		const body = req.body;
+
+		console.log("req", req)
+		
+		const messages = body.messages
+		const secret = body.secret
+		console.log("secret", secret, SECRET_KEY)
+
+		if (secret == SECRET_KEY && messages.length) {
+			try {
+				const prediction = await openai.createChatCompletion({
+					model: "gpt-3.5-turbo",
+					messages: messages,
+					max_tokens: 256
+				});
+
+				const response = prediction.data.choices[0].message.content;
+				res.setHeader('Access-Control-Allow-Origin', '*');
+				res.send(response);
+			} catch (error) {
+				console.log("Failed to get completion - ", error.message);
+				res.status(500).send(error);
+			}
+		} else {
+			res.status(400).send({ error: "Secret doesn't match" });
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
+});
+
 
 app.get('/', async (req, res) => {
 	res.send('Yo!')
