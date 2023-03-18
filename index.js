@@ -2,6 +2,7 @@ const https = require('https');
 const express = require('express');
 const { Configuration, OpenAIApi } = require('openai');
 const OPENAI_KEY = process.env.OPENAI_KEY;
+const SECRET_KEY = process.env.SECRET_KEY;
 const WHATSAPP_ACCESS_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN
 
 const configuration = new Configuration({
@@ -129,6 +130,26 @@ app.post('/webhook', async (req, res) => {
 			let msg = await getChatCompletion(msg_body)
 			console.log("message:", from, msg_body + ": " + msg)
 			let result = await sendMessage(msg, from, phone_number_id);
+		}
+	} catch (error) {
+		console.log(error)
+	}
+
+	// res.send('Yo!')
+	res.sendStatus(200);
+});
+
+app.post('/chat', async (req, res) => {
+
+	try {
+		const body = req.body;
+
+		const { messages, secret } = getMsg(body)
+
+		if (secret == SECRET_KEY && messages.length) {
+			let msg = await getChatCompletion(msg_body)
+			console.log("message:", msg)
+			return msg
 		}
 	} catch (error) {
 		console.log(error)
