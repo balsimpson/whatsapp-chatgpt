@@ -217,7 +217,7 @@ app.get('/chat', async (req, res) => {
 	try {
 		const body = req.body;
 
-		console.log("req", req)
+		// console.log("req", req)
 
 		const prompt = req.query.prompt
 		const secret = req.query.secret
