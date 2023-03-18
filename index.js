@@ -144,6 +144,8 @@ app.post('/chat', async (req, res) => {
 	try {
 		const body = req.body;
 
+		console.log("body", body)
+
 		const { messages, secret } = body
 
 		if (secret == SECRET_KEY && messages.length) {
