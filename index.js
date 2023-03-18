@@ -161,6 +161,10 @@ app.post('/chat', async (req, res) => {
 				console.log("Failed to get completion - ", error.message)
 				return error
 			}
+		} else {
+			return {
+				error: "Secret doesn't match",
+			}
 		}
 	} catch (error) {
 		console.log(error)
