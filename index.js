@@ -51,7 +51,7 @@ async function getCompletion(prompt) {
 }
 
 async function getChatCompletion(prompt) {
-	let model = "text-davinci-003"
+	// let model = "text-davinci-003"
 	try {
 		const prediction = await openai.createChatCompletion({
 			model: "gpt-3.5-turbo",
@@ -147,9 +147,18 @@ app.post('/chat', async (req, res) => {
 		const { messages, secret } = body
 
 		if (secret == SECRET_KEY && messages.length) {
-			let msg = await getChatCompletion(msg_body)
-			console.log("message:", msg)
-			return msg
+			try {
+				const prediction = await openai.createChatCompletion({
+					model: "gpt-3.5-turbo",
+					messages: messages,
+					max_tokens: 256
+				});
+		
+				return prediction.data.choices[0].message.content
+			} catch (error) {
+				console.log("Failed to get completion - ", error.message)
+				return error
+			}
 		}
 	} catch (error) {
 		console.log(error)
