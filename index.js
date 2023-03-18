@@ -225,7 +225,7 @@ app.get('/chat', async (req, res) => {
 
 		if (secret == SECRET_KEY && prompt.length) {
 			try {
-				const msgs = [
+				const messages = [
 					{
 						"role": "system",
 						"content": systemPrompt,
