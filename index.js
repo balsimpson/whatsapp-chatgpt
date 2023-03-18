@@ -168,6 +168,7 @@ app.post('/chat', async (req, res) => {
 		}
 	} catch (error) {
 		console.log(error)
+		return error
 	}
 
 	// res.send('Yo!')
