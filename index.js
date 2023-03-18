@@ -139,6 +139,42 @@ app.post('/webhook', async (req, res) => {
 	res.sendStatus(200);
 });
 
+// app.post('/chat', async (req, res) => {
+
+// 	try {
+// 		const body = req.body;
+
+// 		console.log("body", body)
+
+// 		const { messages, secret } = body
+
+// 		if (secret == SECRET_KEY && messages.length) {
+// 			try {
+// 				const prediction = await openai.createChatCompletion({
+// 					model: "gpt-3.5-turbo",
+// 					messages: messages,
+// 					max_tokens: 256
+// 				});
+		
+// 				return prediction.data.choices[0].message.content
+// 			} catch (error) {
+// 				console.log("Failed to get completion - ", error.message)
+// 				return error
+// 			}
+// 		} else {
+// 			return {
+// 				error: "Secret doesn't match",
+// 			}
+// 		}
+// 	} catch (error) {
+// 		console.log(error)
+// 		return error
+// 	}
+
+// 	// res.send('Yo!')
+// 	res.sendStatus(200);
+// });
+
 app.post('/chat', async (req, res) => {
 
 	try {
@@ -155,25 +191,23 @@ app.post('/chat', async (req, res) => {
 					messages: messages,
 					max_tokens: 256
 				});
-		
-				return prediction.data.choices[0].message.content
+
+				const response = prediction.data.choices[0].message.content;
+				res.setHeader('Access-Control-Allow-Origin', '*');
+				res.send(response);
 			} catch (error) {
-				console.log("Failed to get completion - ", error.message)
-				return error
+				console.log("Failed to get completion - ", error.message);
+				res.status(500).send(error);
 			}
 		} else {
-			return {
-				error: "Secret doesn't match",
-			}
+			res.status(400).send({ error: "Secret doesn't match" });
 		}
 	} catch (error) {
-		console.log(error)
-		return error
+		console.log(error);
+		res.status(500).send(error);
 	}
-
-	// res.send('Yo!')
-	res.sendStatus(200);
 });
+
 
 app.get('/', async (req, res) => {
 	res.send('Yo!')
