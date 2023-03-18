@@ -180,7 +180,7 @@ app.post('/chat', async (req, res) => {
 	try {
 		const body = req.body;
 
-		console.log("body", req)
+		console.log("req", req)
 		
 		const messages = body.messages
 		const secret = body.secret
