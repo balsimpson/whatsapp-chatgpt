@@ -144,7 +144,7 @@ app.post('/chat', async (req, res) => {
 	try {
 		const body = req.body;
 
-		const { messages, secret } = getMsg(body)
+		const { messages, secret } = body
 
 		if (secret == SECRET_KEY && messages.length) {
 			let msg = await getChatCompletion(msg_body)
@@ -156,6 +156,11 @@ app.post('/chat', async (req, res) => {
 	}
 
 	// res.send('Yo!')
+	res.sendStatus(200);
+});
+
+app.get('/', async (req, res) => {
+	res.send('Yo!')
 	res.sendStatus(200);
 });
 
