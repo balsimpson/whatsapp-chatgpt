@@ -5,6 +5,8 @@ const OPENAI_KEY = process.env.OPENAI_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
 const WHATSAPP_ACCESS_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN
 
+const systemPrompt = "You are InstaIntern and your job is to help the user craft engaging, creative Instagram posts. You will output at least 3 options and they should be in this format - Content: The content of the post, Image: suggested image for the post, Hashtags: suggested hashtags for the post."
+
 const configuration = new Configuration({
 	apiKey: OPENAI_KEY,
 });
@@ -155,7 +157,7 @@ app.post('/webhook', async (req, res) => {
 // 					messages: messages,
 // 					max_tokens: 256
 // 				});
-		
+
 // 				return prediction.data.choices[0].message.content
 // 			} catch (error) {
 // 				console.log("Failed to get completion - ", error.message)
@@ -181,7 +183,7 @@ app.post('/chat', async (req, res) => {
 		const body = req.body;
 
 		console.log("req", req)
-		
+
 		const messages = body.messages
 		const secret = body.secret
 		console.log("secret", secret, SECRET_KEY)
@@ -216,13 +218,23 @@ app.get('/chat', async (req, res) => {
 		const body = req.body;
 
 		console.log("req", req)
-		
-		const messages = body.messages
-		const secret = body.secret
+
+		const prompt = req.query.prompt
+		const secret = req.query.secret
 		console.log("secret", secret, SECRET_KEY)
 
-		if (secret == SECRET_KEY && messages.length) {
+		if (secret == SECRET_KEY && prompt.length) {
 			try {
+				const msgs = [
+					{
+						"role": "system",
+						"content": systemPrompt,
+					},
+					{
+						"role": "user",
+						"content": prompt,
+					}
+				]
 				const prediction = await openai.createChatCompletion({
 					model: "gpt-3.5-turbo",
 					messages: messages,
