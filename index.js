@@ -127,7 +127,7 @@ app.post('/webhook', async (req, res) => {
 		const body = req.body;
 
 		const { phone_number_id, from, msg_body } = getMsg(body)
-
+		console.log("phone", phone_number_id, from)
 		if (from && msg_body) {
 			let msg = await getChatCompletion(msg_body)
 			console.log("message:", from, msg_body + ": " + msg)
@@ -251,6 +251,20 @@ app.get('/chat', async (req, res) => {
 		} else {
 			res.status(400).send({ error: "Secret doesn't match" });
 		}
+	} catch (error) {
+		console.log(error);
+		res.status(500).send(error);
+	}
+});
+
+app.get('/message', async (req, res) => {
+
+	try {
+		const msg = req.query.prompt
+		const secret = req.query.secret
+		
+		return await sendMessage(msg, from, phone_number_id);
+
 	} catch (error) {
 		console.log(error);
 		res.status(500).send(error);
