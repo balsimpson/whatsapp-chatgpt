@@ -264,8 +264,8 @@ app.get('/message', async (req, res) => {
 	try {
 		const msg = req.query.msg
 		
-		return await sendMessage(msg, PHONE_NUMBER, PHONE_NUMBER_ID);
-
+		await sendMessage(msg, PHONE_NUMBER, PHONE_NUMBER_ID);
+		res.sendStatus(200);
 	} catch (error) {
 		console.log(error);
 		res.status(500).send(error);
