@@ -4,6 +4,8 @@ const { Configuration, OpenAIApi } = require('openai');
 const OPENAI_KEY = process.env.OPENAI_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
 const WHATSAPP_ACCESS_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN
+const PHONE_NUMBER = process.env.PHONE_NUMBER;
+const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
 
 const systemPrompt = "You are InstaIntern and your job is to help the user craft engaging, creative Instagram posts. You will output at least 3 options and they should be in this format - Content: The content of the post, Image: suggested image for the post, Hashtags: suggested hashtags for the post."
 
@@ -260,10 +262,9 @@ app.get('/chat', async (req, res) => {
 app.get('/message', async (req, res) => {
 
 	try {
-		const msg = req.query.prompt
-		const secret = req.query.secret
+		const msg = req.query.msg
 		
-		return await sendMessage(msg, from, phone_number_id);
+		return await sendMessage(msg, PHONE_NUMBER, PHONE_NUMBER_ID);
 
 	} catch (error) {
 		console.log(error);
