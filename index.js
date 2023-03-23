@@ -284,26 +284,26 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.post('/', (req, res) => {
-  let data = '';
-  req.on('data', chunk => {
-    data += chunk.toString();
-  });
+// app.post('/', (req, res) => {
+//   let data = '';
+//   req.on('data', chunk => {
+//     data += chunk.toString();
+//   });
 
-  req.on('end', () => {
-    const text = data.split('=')[1];
-    const filePath = '/tmp/myFile.txt';
-    fs.writeFile(filePath, text, err => {
-      if (err) {
-        console.error(err);
-        res.sendStatus(500);
-      } else {
-        console.log('File written successfully');
-        res.sendStatus(200);
-      }
-    });
-  });
-});
+//   req.on('end', () => {
+//     const text = data.split('=')[1];
+//     const filePath = '/tmp/myFile.txt';
+//     fs.writeFile(filePath, text, err => {
+//       if (err) {
+//         console.error(err);
+//         res.sendStatus(500);
+//       } else {
+//         console.log('File written successfully');
+//         res.sendStatus(200);
+//       }
+//     });
+//   });
+// });
 
 app.post('/save', (req, res) => {
   let data = '';
