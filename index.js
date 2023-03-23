@@ -267,8 +267,13 @@ app.get('/message', async (req, res) => {
 	try {
 		const msg = req.query.msg
 		
-		await sendMessage(msg, PHONE_NUMBER, PHONE_NUMBER_ID);
-		res.sendStatus(200);
+		// await sendMessage(msg, PHONE_NUMBER, PHONE_NUMBER_ID);
+		// res.sendStatus(200);
+		setTimeout(() => {
+			console.log(`Reminder: ${msg}`);
+			// Send out a message here
+		}, 10000);
+		res.status(200).send('Reminder set');
 	} catch (error) {
 		console.log(error);
 		res.status(500).send(error);
