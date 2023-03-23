@@ -284,7 +284,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.post('/', (req, res) => {
+app.post('/save', (req, res) => {
   let data = '';
   req.on('data', chunk => {
     data += chunk.toString();
