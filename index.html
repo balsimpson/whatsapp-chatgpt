@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>My Express App</title>
+	<title>My Express App</title>
+	<link href="https://cdn.tailwindcss.com" rel="stylesheet">
 </head>
-
-<body>
-  <label for="text-input">Enter some text:</label>
-  <input type="text" id="text-input" name="text-input">
+<body class="bg-gray-200">
+	<div class="container mx-auto mt-8">
+		<form method="POST" action="/" class="p-8 bg-white rounded-lg shadow-md">
+			<label for="text-input" class="block mb-2 font-medium">Enter some text:</label>
+			<input type="text" id="text-input" name="text-input" class="w-full px-4 py-2 mb-4 border rounded-lg">
+			<button type="submit" class="px-4 py-2 text-white transition-colors duration-200 bg-blue-500 rounded-lg hover:bg-blue-600">Submit</button>
+		</form>
+	</div>
 </body>
-
 </html>
