@@ -1,6 +1,7 @@
 const https = require('https');
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const { Configuration, OpenAIApi } = require('openai');
 const OPENAI_KEY = process.env.OPENAI_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
