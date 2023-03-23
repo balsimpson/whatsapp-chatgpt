@@ -2,6 +2,7 @@ const https = require('https');
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const querystring = require('querystring');
 const { Configuration, OpenAIApi } = require('openai');
 const OPENAI_KEY = process.env.OPENAI_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -312,15 +313,15 @@ app.post('/save', (req, res) => {
   });
 
   req.on('end', () => {
-    const text = data.split('=')[1];
+    const formData = querystring.parse(data);
+    const textInput = formData['text-input'].replace(/\+/g, ' ');
     const filePath = '/tmp/myFile.txt';
-    fs.writeFile(filePath, text, err => {
+    fs.appendFile(filePath, textInput, err => {
       if (err) {
         console.error(err);
         res.sendStatus(500);
       } else {
-        console.log('File written successfully');
-        res.sendStatus(200);
+        res.redirect('/');
       }
     });
   });
