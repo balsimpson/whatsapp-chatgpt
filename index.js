@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const querystring = require('querystring');
+const cron = require('node-cron');
 const { Configuration, OpenAIApi } = require('openai');
 const OPENAI_KEY = process.env.OPENAI_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -269,11 +270,15 @@ app.get('/message', async (req, res) => {
 		
 		// await sendMessage(msg, PHONE_NUMBER, PHONE_NUMBER_ID);
 		// res.sendStatus(200);
-		setTimeout(() => {
-			console.log(`Reminder: ${msg}`);
+		// setTimeout(() => {
+		// 	console.log(`Reminder: ${msg}`);
+		// 	sendMessage(msg, PHONE_NUMBER, PHONE_NUMBER_ID);
+		// 	// Send out a message here
+		// }, 10000);
+		cron.schedule('* * * * *', () => {
+			console.log('running a task every minute');
 			sendMessage(msg, PHONE_NUMBER, PHONE_NUMBER_ID);
-			// Send out a message here
-		}, 10000);
+		});
 		res.status(200).send('Reminder set');
 	} catch (error) {
 		console.log(error);
