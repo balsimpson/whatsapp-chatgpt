@@ -1,5 +1,6 @@
 const https = require('https');
 const express = require('express');
+const path = require('path');
 const { Configuration, OpenAIApi } = require('openai');
 const OPENAI_KEY = process.env.OPENAI_KEY;
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -273,9 +274,13 @@ app.get('/message', async (req, res) => {
 });
 
 
-app.get('/', async (req, res) => {
-	res.send('Yo!')
-	res.sendStatus(200);
+// app.get('/', async (req, res) => {
+// 	res.send('Yo!')
+// 	res.sendStatus(200);
+// });
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/webhook', (req, res) => {
