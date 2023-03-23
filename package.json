@@ -18,7 +18,6 @@
   "homepage": "https://github.com/balsimpson/whatsapp-chatgpt-bot#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "node-cron": "^3.0.2",
     "openai": "^3.1.0"
   }
 }
