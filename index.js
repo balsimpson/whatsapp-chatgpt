@@ -326,6 +326,18 @@ app.post('/save', (req, res) => {
   });
 });
 
+app.get('/get', (req, res) => {
+  const filePath = '/tmp/myFile.txt';
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      res.sendStatus(500);
+    } else {
+      res.send(data);
+    }
+  });
+});
+
 app.get('/webhook', (req, res) => {
 	let mode = req.query["hub.mode"];
 	let token = req.query["hub.verify_token"];
