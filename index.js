@@ -305,6 +305,27 @@ app.post('/', (req, res) => {
   });
 });
 
+app.post('/save', (req, res) => {
+  let data = '';
+  req.on('data', chunk => {
+    data += chunk.toString();
+  });
+
+  req.on('end', () => {
+    const text = data.split('=')[1];
+    const filePath = '/tmp/myFile.txt';
+    fs.writeFile(filePath, text, err => {
+      if (err) {
+        console.error(err);
+        res.sendStatus(500);
+      } else {
+        console.log('File written successfully');
+        res.sendStatus(200);
+      }
+    });
+  });
+});
+
 app.get('/webhook', (req, res) => {
 	let mode = req.query["hub.mode"];
 	let token = req.query["hub.verify_token"];
