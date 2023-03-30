@@ -197,7 +197,8 @@ app.post('/chat', async (req, res) => {
 		if (secret == SECRET_KEY && messages.length) {
 			try {
 				const prediction = await openai.createChatCompletion({
-					model: "gpt-3.5-turbo",
+					// model: "gpt-3.5-turbo",
+					model: "gpt-4",
 					messages: messages,
 					max_tokens: 256
 				});
@@ -242,7 +243,8 @@ app.get('/chat', async (req, res) => {
 					}
 				]
 				const prediction = await openai.createChatCompletion({
-					model: "gpt-3.5-turbo",
+					// model: "gpt-3.5-turbo",
+					model: "gpt-4",
 					messages: messages,
 					max_tokens: 256
 				});
