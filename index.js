@@ -62,7 +62,8 @@ async function getChatCompletion(prompt) {
 	// let model = "text-davinci-003"
 	try {
 		const prediction = await openai.createChatCompletion({
-			model: "gpt-3.5-turbo",
+			// model: "gpt-3.5-turbo",
+			model: "gpt-4",
 			messages: [{
 				role: "user",
 				content: prompt
@@ -192,7 +193,7 @@ app.post('/chat', async (req, res) => {
 
 		const messages = body.messages
 		const secret = body.secret
-		console.log("secret", secret, SECRET_KEY)
+		// console.log("secret", secret, SECRET_KEY)
 
 		if (secret == SECRET_KEY && messages.length) {
 			try {
@@ -228,7 +229,7 @@ app.get('/chat', async (req, res) => {
 
 		const prompt = req.query.prompt
 		const secret = req.query.secret
-		console.log("secret", secret, SECRET_KEY)
+		// console.log("secret", secret, SECRET_KEY)
 
 		if (secret == SECRET_KEY && prompt.length) {
 			try {
