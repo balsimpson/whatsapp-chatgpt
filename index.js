@@ -62,13 +62,13 @@ async function getChatCompletion(prompt) {
 	// let model = "text-davinci-003"
 	try {
 		const prediction = await openai.createChatCompletion({
-			// model: "gpt-3.5-turbo",
-			model: "gpt-4",
+			model: "gpt-3.5-turbo",
+			// model: "gpt-4",
 			messages: [{
 				role: "user",
 				content: prompt
 			}],
-			max_tokens: 256
+			max_tokens: 200
 		});
 
 		return prediction.data.choices[0].message.content
