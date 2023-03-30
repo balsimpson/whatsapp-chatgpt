@@ -68,7 +68,7 @@ async function getChatCompletion(prompt) {
 				role: "user",
 				content: prompt
 			}],
-			max_tokens: 200
+			max_tokens: 300
 		});
 
 		return prediction.data.choices[0].message.content
